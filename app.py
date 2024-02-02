@@ -8,12 +8,6 @@ import sqlite3
 from streamlit_option_menu import option_menu
 import datetime
 
-# Account 1
-# api_sec_key = "AIzaSyANq-DIAtHDz4N0PmS3DdGf5prav1YjhGg"
-# Account 2
-# api_sec_key = "AIzaSyDgBH0MTQNerNeV6zeCfa3A5wcoOWglhBA"
-# Account 3
-api_sec_key = "AIzaSyDGnjOmsBs8i2cE30gHT42vlUW2j3a8Lx4"
 
 class AppController:
     # Streamlit App Navigaion controller
@@ -327,7 +321,11 @@ class Analysis:
     def __analysis_2(self):
         sql = '''SELECT c.channel_name as 'Channel Name', COUNT(v.video_id) as 'Video Count' FROM video as v LEFT JOIN playlist as p ON v.playlist_id = p.playlist_id LEFT JOIN channel as c on c.channel_id = p.channel_id GROUP BY c.channel_name ORDER BY COUNT(v.video_id) DESC;'''
         df = pd.read_sql_query(con=self.__sql.get_sql_connection(), sql=sql)
-        st.dataframe(df)
+        chart = st.checkbox(label="View Chart")
+        if chart:
+            st.bar_chart(df.set_index('Channel Name'))
+        else:
+            st.dataframe(df)
     
     def __analysis_3(self):
         channels = self.__sql.get_channels_in_db()
@@ -335,11 +333,15 @@ class Analysis:
         if selected_channel:
             sql = f'''SELECT v.video_name as 'Video Name', v.view_count as 'Video View Count' FROM video as v LEFT JOIN playlist as p ON v.playlist_id = p.playlist_id LEFT JOIN channel as c on c.channel_id = p.channel_id WHERE c.channel_name = '{selected_channel}' ORDER BY v.view_count DESC LIMIT 10 ;'''
             df = pd.read_sql_query(con=self.__sql.get_sql_connection(), sql=sql)
-            st.dataframe(df)
+            chart = st.checkbox(label="View Chart")
+            if chart:
+                st.bar_chart(df.set_index('Video Name'))
+            else:
+                st.dataframe(df)
     
     def __analysis_4(self):
         channels = self.__sql.get_channels_in_db()
-        selected_channel = st.selectbox(label="Select a Channel to View Top 10 'Comment Count of Video'", options=channels, index=None, placeholder="Select a channel")
+        selected_channel = st.selectbox(label="Select a Channel to View 'Comment Count of Video'", options=channels, index=None, placeholder="Select a channel")
         if selected_channel:
             sql = f'''SELECT v.video_name as 'Video Name', v.comment_count as 'Video Comment Count' FROM video as v LEFT JOIN playlist as p ON v.playlist_id = p.playlist_id LEFT JOIN channel as c on c.channel_id = p.channel_id WHERE c.channel_name = '{selected_channel}' ORDER BY v.comment_count DESC ;'''
             df = pd.read_sql_query(con=self.__sql.get_sql_connection(), sql=sql)
@@ -358,7 +360,11 @@ class Analysis:
     def __analysis_7(self):
         sql = '''SELECT channel_name AS 'Channel Name', channel_views AS 'Channel View Count' FROM channel ORDER BY channel_views DESC;'''
         df = pd.read_sql_query(con=self.__sql.get_sql_connection(), sql=sql)
-        st.dataframe(df)
+        chart = st.checkbox(label="View Chart")
+        if chart:
+            st.bar_chart(df.set_index('Channel Name'))
+        else:
+            st.dataframe(df)
 
     def __analysis_8(self):
         sql = '''SELECT DISTINCT c.channel_name AS 'Channel Name' FROM channel AS c LEFT JOIN playlist as p on c.channel_id = p.channel_id LEFT JOIN video as v on v.playlist_id = p.playlist_id WHERE v.published_at >= '2022-01-01' and v.published_at <= '2022-12-30';'''
