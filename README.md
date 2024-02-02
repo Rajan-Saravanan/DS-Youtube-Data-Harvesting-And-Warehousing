@@ -16,6 +16,11 @@ This project is about creating a Streamlit app with ETL functionality using Pyth
     * User should enable Youtube Data API V3 in Google console for the accout API Key is generated
     * MongoDB used in this project is free tire Atlas. If user face issue with MongoDB fell free to create use MongoDB installed in local machine.
     * Don't forget to modify MongoDB connection in MongoDB class constructor method in app.py
-    
+
+2. To use Streamlit web application from remote server.
+    * User should have an API Key generated in Google console
+    * User should enable Youtube Data API V3 in Google console for the accout API Key is generated
+    * Visit (https://ds-youtube-data-harvesting-and-warehousing-9xch6okgwhzerkwbscv.streamlit.app/) and start using the application.
+
 ### Screenshot of the Streamlit web application
-![alt text](image.png)
+![alt text](streamlit_app_screenshot.png)
