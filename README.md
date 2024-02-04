@@ -1,4 +1,4 @@
-# Youtub Data Harvesing and Warehousing
+# Youtube Data Harvesing and Warehousing
 
 ### About the Project
 This project is about creating a Streamlit app with ETL functionality using Python programming language.
@@ -20,7 +20,7 @@ This project is about creating a Streamlit app with ETL functionality using Pyth
 2. To use Streamlit web application from remote server.
     * User should have an API Key generated in Google console
     * User should enable Youtube Data API V3 in Google console for the accout API Key is generated
-    * Visit (https://ds-youtube-data-harvesting-and-warehousing-9xch6okgwhzerkwbscv.streamlit.app/) and start using the application.
+    * Visit (https://youtube-data-harvesting-and-warehousing-e7bxqgzivrhdxfsidc4aee.streamlit.app/) and start using the application.
 
 ### Screenshot of the Streamlit web application
 ![alt text](streamlit_app_screenshot.png)

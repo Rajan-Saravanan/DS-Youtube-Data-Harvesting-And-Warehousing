@@ -41,7 +41,7 @@ class ExtractData:
     def __ui_element_to_get_channel_id(self):
         col1, col2 = st.columns(2)
         channel_id = col1.text_input("Enter Youtube Channel ID")
-        api_token = col2.text_input("Enter API Key")
+        api_token = col2.text_input(label="Enter API Key", type='password')
         # st.button("Get Channel Data", on_click=self.__validate_and_get_channel_data, args=[channel_id, api_token], use_container_width=True)
         if st.button("Extract Channel Data From Youtube", use_container_width=True):
             self.__validate_and_get_channel_data(channel_id, api_token)
